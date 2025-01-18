@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance Tracker - Miscellaneous Expenses</title>
+    <style>* {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Arial', sans-serif;
+    }
+    
+    body {
+        background: linear-gradient(to right, #6a11cb, #2575fc);
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: #fff;
+        padding: 20px;
+    }
+    
+    h1, h2 {
+        color: #fff;
+        margin-bottom: 20px;
+        font-size: 2em;
+        text-align: center;
+    }
+    
+    .add-expense {
+        background: rgba(0, 0, 0, 0.7);
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        width: 100%;
+        max-width: 400px;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    
+    .add-expense h2 {
+        font-size: 1.6em;
+        margin-bottom: 20px;
+    }
+    
+    label {
+        display: block;
+        margin-bottom: 10px;
+        font-size: 1.1em;
+        color: #fff;
+        text-align: left;
+    }
+    
+    input[type="text"], input[type="number"] {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 20px;
+        border: none;
+        border-radius: 8px;
+        background-color: #fff;
+        color: #333;
+        font-size: 1em;
+    }
+    
+    input[type="text"]:focus, input[type="number"]:focus {
+        outline: none;
+        border: 2px solid #2575fc;
+        box-shadow: 0 0 5px rgba(37, 117, 252, 0.5);
+    }
+    
+    button.btn {
+        padding: 12px 20px;
+        background-color: #2575fc;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-size: 1.1em;
+        cursor: pointer;
+        width: 100%;
+        transition: background-color 0.3s ease;
+    }
+    
+    button.btn:hover {
+        background-color: #6a11cb;
+    }
+    
+    table {
+        width: 100%;
+        max-width: 800px;
+        margin-top: 30px;
+        border-collapse: collapse;
+        background-color: rgba(0, 0, 0, 0.7);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    
+    th, td {
+        padding: 15px;
+        text-align: left;
+        color: #fff;
+    }
+    
+    th {
+        background-color: #2575fc;
+    }
+    
+    tr:nth-child(even) {
+        background-color: #333;
+    }
+    
+    tr:hover {
+        background-color: #444;
+    }
+    
+    a.btn {
+        padding: 8px 16px;
+        background-color: #feb47b;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 8px;
+        transition: background-color 0.3s ease;
+    }
+    
+    a.btn:hover {
+        background-color: #ff7e5f;
+    }
+    .home-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #3498db;
+            color: white;
+            padding: 12px 25px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.2);
+        }
+
+        .home-button:hover {
+            background-color: #2980b9;
+            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Miscellaneous Expenses</h1>
+    <a href="{{ url_for('dashboard') }}" class="home-button right">Home</a>
+
+    <div class="add-expense">
+        <h2>Add New Expense</h2>
+        <form action="/miscellaneous" method="POST">
+            <label for="name">Expense Name:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="amount">Amount:</label>
+            <input type="number" id="amount" name="amount" step="0.01" required>
+            <button type="submit" class="btn">Add Expense</button>
+        </form>
+    </div>
+
+    <h2>Expense List</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Amount</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for expense in expenses %}
+            <tr>
+                <td>{{ expense.name }}</td>
+                <td>{{ expense.amount }}</td>
+                <td>
+                    <a href="/update_expense/{{ expense.id }}" class="btn">Update</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>

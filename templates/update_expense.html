@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Expense</title>
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background: linear-gradient(to right, #ff7e5f, #feb47b);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+}
+
+.form-container {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+    color: #fff;
+    text-align: left;
+}
+
+input[type="text"], input[type="number"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: #fff;
+    color: #333;
+    font-size: 1em;
+}
+
+input[type="text"]:focus, input[type="number"]:focus {
+    outline: none;
+    border: 2px solid #feb47b;
+    box-shadow: 0 0 5px rgba(254, 180, 123, 0.5);
+}
+
+button.btn {
+    padding: 12px 20px;
+    background-color: #feb47b;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+button.btn:hover {
+    background-color: #ff7e5f;
+}
+
+a.back-link {
+    display: inline-block;
+    margin-top: 20px;
+    color: #feb47b;
+    text-decoration: none;
+    font-size: 1em;
+    transition: color 0.3s ease;
+}
+
+a.back-link:hover {
+    color: #ff7e5f;
+}
+.home-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #3498db;
+            color: white;
+            padding: 12px 25px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.2);
+        }
+
+        .home-button:hover {
+            background-color: #2980b9;
+            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3);
+            transform: translateY(-2px);
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h1>Update Expense</h1>
+        <a href="{{ url_for('dashboard') }}" class="home-button right">Home</a>
+        <form action="/update_expense/{{ expense.id }}" method="POST">
+            <label for="name">Expense Name:</label>
+            <input type="text" id="name" name="name" value="{{ expense.name }}" required>
+
+            <label for="amount">Amount:</label>
+            <input type="number" id="amount" name="amount" value="{{ expense.amount }}" step="0.01" required>
+
+            <button type="submit" class="btn">Update Expense</button>
+        </form>
+
+        <a href="/miscellaneous" class="back-link">Back to Expenses</a>
+    </div>
+
+</body>
+</html>

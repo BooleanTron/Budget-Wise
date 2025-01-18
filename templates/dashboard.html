@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DashBoard Budget-Wise</title>
+    <link rel="stylesheet" href="static/dashboard-style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <nav class="navbar">
+            <ul>
+                <li><p>Hello, {{ name }}</p></li>
+                <li><a href="{{url_for('update_income')}}">Update Income</a></li>
+                <li>
+                    <a href="{{ url_for('necessities') }}">
+                        <span class="circle" style="background-color: {{necessities_color}}"></span>
+                        Necessities
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('additional_expenditure') }}">
+                        <span class="circle" style="background-color: {{ additional_color }}"></span>
+                        Additional Expenditures
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('miscellaneous') }}">
+                        <span class="circle" style="background-color: {{ miscellaneous_color }}"></span>
+                        Miscellaneous
+                    </a>
+                </li>
+                <li><a href="{{ url_for('savings') }}">Savings</a></li>
+                <li><a href="{{ url_for('login') }}">Logout</a></li>
+            </ul>
+        </nav>
+
+        <main class="main-content">
+            <header>
+                <h1>Budget-Wise</h1>
+                <h2>DashBoard</h2>
+            </header>
+
+            <section class="total-expense-section">
+                <p>Your Total Expenditure: </p>
+                <span class="total-expense">{{total_expense}}</span>
+            </section>
+
+            <canvas id="myPieChart" width="400" height="400"></canvas>
+        </main>
+    </div>
+
+    <script>
+        const labels = {{ labels | tojson }};
+        const values = {{ values | tojson }};
+        
+        const ctx = document.getElementById('myPieChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Budget Distribution',
+                    data: values,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+            }
+        });
+    </script>
+</body>
+</html>

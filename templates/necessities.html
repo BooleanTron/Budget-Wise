@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Necessities</title>
+    <link rel="stylesheet" href="static/necessities-style.css">
+    <style>.home-button {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background-color: #3498db;
+        color: white;
+        padding: 12px 25px;
+        font-size: 1.2rem;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 6px 20px rgba(52, 152, 219, 0.2);
+    }
+
+    .home-button:hover {
+        background-color: #2980b9;
+        box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3);
+        transform: translateY(-2px);
+    }</style>
+</head>
+<body>
+    <a href="{{ url_for('dashboard') }}" class="home-button right">Home</a>
+    <div class="container">
+        <h1 class="title">Monthly Necessities</h1>
+        <table class="expenses-table">
+            <thead>
+                <tr>
+                    <th>Expense Type</th>
+                    <th>Amount</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for necessity in necessities %}
+                <tr>
+                    <td>Housing</td>
+                    <td>{{ necessity.housing }}</td>
+                    <td>
+                        <a href="{{ url_for('update_necessity', id=necessity.id, expense='housing') }}" class="update-link">Update</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Transport</td>
+                    <td>{{ necessity.transport }}</td>
+                    <td>
+                        <a href="{{ url_for('update_necessity', id=necessity.id, expense='transport') }}" class="update-link">Update</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Food</td>
+                    <td>{{ necessity.food }}</td>
+                    <td>
+                        <a href="{{ url_for('update_necessity', id=necessity.id, expense='food') }}" class="update-link">Update</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Stationery</td>
+                    <td>{{ necessity.stationery }}</td>
+                    <td>
+                        <a href="{{ url_for('update_necessity', id=necessity.id, expense='stationery') }}" class="update-link">Update</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Medicine</td>
+                    <td>{{ necessity.medicine }}</td>
+                    <td>
+                        <a href="{{ url_for('update_necessity', id=necessity.id, expense='medicine') }}" class="update-link">Update</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Phone Bills</td>
+                    <td>{{ necessity.phone_bills }}</td>
+                    <td>
+                        <a href="{{ url_for('update_necessity', id=necessity.id, expense='phone_bills') }}" class="update-link">Update</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Toiletries</td>
+                    <td>{{ necessity.toiletries }}</td>
+                    <td>
+                        <a href="{{ url_for('update_necessity', id=necessity.id, expense='toiletries') }}" class="update-link">Update</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
